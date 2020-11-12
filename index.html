@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Jquery DataTable</title>	
+	  <!-- Import Bootstrap and JQuery -->
+	  <link rel="stylesheet" 
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+	  <script 
+	    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">    
+	  </script>        
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	  </script>
+	  <!-- DataTables -->
+	  <link rel="stylesheet" 
+	    type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> 
+	  <script type="text/javascript" 
+	    charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js">    
+	  </script>
+	  <!-- My CSS and JQuery -->
+	  <link href="./css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+	    <header>
+	        <div class="page-header">
+	            <h3>Blog Tutorail With jQuery</h3>
+	        </div>
+	    </header>
+	<div class="container body-content">    
+	<section class="content">
+	    <div class="container-fluid">
+	        <div class="card card-default">
+	            <div class="card-body">
+	                <div class="row">
+	                    <div class="col-md-3"></div>
+	                    <div class="col-md-6">
+	                        <form method="post" id="myForm" name="myForms" onsubmit="return validateform()">
+	                            <div class="form-group">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <label>ID</label>
+	                                    </div>
+	                                    <div class="col-md-9">
+	                                        <input type="number" name="id" class="form-control" id="myInputId" />
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="form-group">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <label>Name</label>
+	                                    </div>
+	                                    <div class="col-md-9">
+	                                        <input class="form-control" name="name" id="myInputName" />
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                    <div class="col-md-3"></div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="container-fluid">
+	        <div class="card card-default">
+	            <div class="card-body">
+	                <form action="abc">
+	                    <div class="row">
+	                        <div class="col-md-3">
+	                            <div class="form-group">
+	                                <label>Name</label>
+	                                <input type="text" class="form-control" id="name" />
+	                            </div>
+	                            <div class="form-group">
+	                                <label>Office</label>
+	                                <input type="text" class="form-control" id="office" />
+	                            </div>
+	                        </div>
+	                        <div class="col-md-3">
+	                            <div class="form-group">
+	                                <label>Position</label>
+	                                <input type="text" class="form-control" id="position" />
+	                            </div>
+	                            <div class="form-group">
+	                                <label>extn</label>
+	                                <input type="text" class="form-control" id="extn"/>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-3">
+	                            <div class="form-group">
+	                                <label>Salary</label>
+	                                <input type="text" class="form-control" id="salary" />
+	                            </div>
+	                        </div>
+	                        <div class="col-md-3">
+	                            <div class="form-group">
+	                                <label>Date</label>
+	                                <input type="text" class="form-control" id="date" />
+	                            </div>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="card-body" style="padding-bottom: 50px;">
+	        <table id="example" class="table table-bordered table-hover">
+	            <thead>
+	                <tr class="project-actions text-center">
+	                    <th>ID</th>
+	                    <th>Name</th>
+	                    <th>Position</th>
+	                    <th>Salary</th>
+	                    <th>Start Date</th>
+	                    <th>Office</th>
+	                    <th>Extn</th>
+	                    <th>Delete</th>
+	                </tr>
+	            </thead>
+	            <tbody id="myTable" style="text-align: center;">
+	            </tbody>
+	        </table>
+	    </div>
+	</section>
+	</div>
+
+	<div class="container-fluid" id="fix">
+	    <div class="card card-default">
+	        <div class="card-bodys row">
+	            <button class="btn btn-outline-primary col-md-1">F1</button>
+	            <button class="btn btn-outline-primary col-md-1">F2</button>
+	            <button class="btn btn-outline-primary col-md-1" id="btn_search">
+	                <span>F3</span>
+	                <br />
+	                <span>Search</span>
+	            </button>
+	            <button class="btn btn-outline-primary col-md-1">F4</button>
+	            <button class="btn btn-outline-primary col-md-1" id="btn_reset">
+	                <span>F5</span>
+	                <br />
+	                <span>Clear</span>
+	            </button>
+	            <button class="btn btn-outline-primary col-md-1">F6</button>
+	            <button class="btn btn-outline-primary col-md-1">F7</button>
+	            <button class="btn btn-outline-primary col-md-1">F8</button>
+	            <button class="btn btn-outline-primary col-md-1">F9</button>
+	            <button class="btn btn-outline-primary col-md-1" id="btn_save">
+	                <span>F10</span>
+	                <br />
+	                <span>Save</span>
+	            </button>
+	            <button class="btn btn-outline-primary col-md-1">F11</button>
+	            <button class="btn btn-outline-primary col-md-1">F12</button>
+	        </div>
+	    </div>
+	</div>
+
+<script src="js/blog.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
