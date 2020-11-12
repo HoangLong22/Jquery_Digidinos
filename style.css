@@ -1,0 +1,45 @@
+.page-header h3 {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    background-color: #1e1e6b;
+    color: #fff;
+    font-weight: 700;
+}
+.container-fluid {
+    padding-bottom: 10px;
+}
+#fix {
+   position: fixed;
+   bottom: 0;
+}
+#fix .col-md-1 {
+    flex: 0 0 7.5%;
+    max-width: 7.5%;
+    margin-left: 6px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+#example {
+    text-align: center;
+}
+.container-button {
+    text-align: center;
+    background-color: #030338;
+    color: #fff;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.card-bodys {
+    background-color: #030338;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+.btn-outline-primary {
+    color: #fff;
+    border: solid 1px #fff;
+}
+
+.dataTables_filter {
+    display: none;
+}
