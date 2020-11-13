@@ -1,5 +1,4 @@
-function obj(row,id) {
-    if(id==1) {
+function createSelectPosition(row) {
         var positions = JSON.parse(dataJson).positions;
                 var result = '<select id = "position_' + row["id"] + '" class="form-control form-control-sm">';
                 positions.forEach(function (item) {
@@ -12,8 +11,9 @@ function obj(row,id) {
                 });
                 result += '</select >';
                 return result;
-    }
-    else if(id==2){
+
+}
+function createSelectOffice(row) {
         var offices = JSON.parse(dataJson).offices;
                 var result = '<select id="office_' + row["id"] + '" class="form-control form-control-sm">';
                 offices.forEach(function (item) {
@@ -26,7 +26,6 @@ function obj(row,id) {
                 });
                 result += '</select >';
                 return result;
-    }
    
 }
 
@@ -38,7 +37,7 @@ var table = $('#example').DataTable({
         { data: 'name' },
         {
             data:  function (row) {
-                var objs = obj(row,1);
+                var objs = createSelectPosition(row);
                 return objs ;
             }
         },
@@ -54,8 +53,8 @@ var table = $('#example').DataTable({
         },
         {
             data: function (row) {
-                var objs = obj(row,2);
-                return objs ;
+                var obj = createSelectOffice(row);
+                return obj ;
             }
         },
         {
@@ -86,15 +85,18 @@ var tables = $('#example tbody').html();
 $(document).ready(function(){
  $("#btn_search").on("click", function() {
     $('#example tbody').html(tables);
-    var value = $('#myInputName').val();
-    if(value != "" || values != "") {
-        $("#example tr").filter(function() {      
-       $(this).toggle($(this).text().indexOf(value) > -1);
-        });
-    } else {
-        alert("Cần nhập các trường")
-    }
+    var id = $('#myInputId').val();
+    var name = $('#myInputName').val();
+    $('#example tbody tr').each(function () {
+        var table_id = $(this).find('td:eq(1)').find("input").val();
+        var table_name = $(this).find('td:eq(1)').find("input").val();
+        if(id == table_id || table_name.toLowerCase().includes(name.toLowerCase())){
+            var content ="";
+            content += '<tr>' + $(this).html() + '</tr>';
+           $('#example tbody').html(content);
+        }
   });
+});
 });
 //$('#btn_search').on('click', function () {
   //  var id = $('#myInputId').val();
@@ -113,15 +115,16 @@ $(document).ready(function(){
   //  $('#office').val(data["office"]);
   //  $('#extn').val(data["extn"]);
 //});
+
 //detaul
 $(function () {
   $('#example tr').click(function (e) {
-    var name = $(this).find('td:nth-child(2)').text();
-    var position = $(this).find('td:nth-child(3) option:selected').text();
-    var salary = $(this).find('td:nth-child(4)').children().val();
-    var date = $(this).find('td:nth-child(5)').children().val();
-    var office = $(this).find('td:nth-child(6) option:selected').text();
-    var extn = $(this).find('td:nth-child(7)').children().val();
+    var name = $(this).find('td:eq(2)').find("input").val();
+    var position = $(this).find('td:eq(3) option:selected').find("input").val();
+    var salary = $(this).find('td:eq(4)').find("input").val();
+    var date = $(this).find('td:eq(5)').find("input").val();
+    var office = $(this).find('td:eq(6) option:selected').find("input").val();
+    var extn = $(this).find('td:eq(7    )').find("input").val();
       $('#name').val(name);
       $('#position').val(position);
       $('#salary').val(salary);
@@ -130,40 +133,20 @@ $(function () {
       $('#extn').val(extn);
     });
   });
+
 //Save
-
 $('#btn_save').on('click', function () {
-    var data = table.rows().data();
-    data.each(function (item) {
-        //salary
-        var salary = $('#salary_' + item.id).val();
-        if (salary) {
-            item.salary = salary;
-        }
-
-        //start_date
-        var start_date = $('#date_' + item.id).val();
-        if (start_date) {
-            item.start_date = start_date;
-        }
-
-        //extn
-        var extn = $('#extn_' + item.id).val();
-        if (extn) {
-            item.extn = extn;
-        }
-
-        //position
-        var position = $('#position_' + item.id + ' option:selected').val();
-        if (position) {
-            item.position = position;
-        }
-
-        //office
-        var office = $('#office_' + item.id + ' option:selected').val();
-        if (office) {
-            item.office = office;
-        }
+    $('#example tbody tr').each(function () {
+        var item = {
+            id: $(this).find('td:nth-child(1)').text(),
+            name: $(this).find('td:nth-child(2)').text(),
+            position: $(this).find('td:nth-child(3) option:selected').text(),
+            salary: $(this).find('td:nth-child(4)').children().val(),
+            date: $(this).find('td:nth-child(5)').children().val(),
+            office: $(this).find('td:nth-child(6) option:selected').text(),
+            extn: $(this).find('td:nth-child(7)').children().val()
+        };
+         console.log(item);
     });
-    console.log(data)
+  
 });
