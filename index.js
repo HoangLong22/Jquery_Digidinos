@@ -87,11 +87,11 @@ $(document).ready(function(){
     $('#example tbody').html(tables);
     var id = $('#myInputId').val();
     var name = $('#myInputName').val();
+    var content ="";
     $('#example tbody tr').each(function () {
         var table_id = $(this).find('td:eq(1)').find("input").val();
         var table_name = $(this).find('td:eq(1)').find("input").val();
         if(id == table_id || table_name.toLowerCase().includes(name.toLowerCase())){
-            var content ="";
             content += '<tr>' + $(this).html() + '</tr>';
            $('#example tbody').html(content);
         }
